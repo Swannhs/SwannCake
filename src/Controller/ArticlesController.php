@@ -1,7 +1,7 @@
 <?php
 namespace App\Controller;
 
-class RestController extends AppController
+class ArticlesController extends AppController
 {
     public function initialize()
     {
@@ -12,9 +12,13 @@ class RestController extends AppController
     public function index()
     {
 
+        $this->loadComponent('Paginator');
+        $articles = $this->Paginator->paginate($this->Articles->find());
+
+
         $this->set([
-            'name' => 'Swann',
-            '_serialize' => ['name']
+            'articles' => $articles,
+            '_serialize' => ['articles']
         ]);
     }
 }
